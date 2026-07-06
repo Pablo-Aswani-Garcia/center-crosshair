@@ -229,7 +229,7 @@ export class AxisHandler {
     const axisX = coordinateSystem.toCanvasX(0);
     const axisY = coordinateSystem.toCanvasY(0);
     this.context.textAlign = 'center';
-    this.context.fillText('x',axisX -  this.canvas.width / 2 + 20, axisY );
+    this.context.fillText('x', axisX - this.canvas.width / 2 + 20, axisY );
     this.context.save();
     this.context.fillText('y', axisX, axisY + this.canvas.height / 2);
     this.context.fillText('y', 0, 0);

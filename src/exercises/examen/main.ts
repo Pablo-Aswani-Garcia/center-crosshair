@@ -11,8 +11,8 @@
  */
 
 import { BuffonNeedleController } from './buffons_needle_controller';
-import {BuffonNeedleModel} from './buffons_needle_model.js';
-import {BuffonNeedleView } from './buffon_needle_view.js';
+import { BuffonNeedleModel} from './buffons_needle_model.js';
+import { BuffonNeedleView } from './buffon_needle_view.js';
 
 
 /**
