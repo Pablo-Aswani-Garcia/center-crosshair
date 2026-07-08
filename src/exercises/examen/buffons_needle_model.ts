@@ -59,9 +59,11 @@ export class BuffonNeedleModel {
   /**
    * the angle the line makes
    * @param {FunctionPoint[]} line - the line to calculate the angle
+   * @returns {number} - the angle in degrees
    */
   angle(line: FunctionPoint[]): number {
-    return Math.atan((line[1].yPoint - line[0].yPoint) / (line[1].xPoint - line[0].xPoint));
+    return Math.atan((line[1].yPoint - line[0].yPoint) / (line[1].xPoint - line[0].xPoint)) * 180 / pi;
+
   }
 
   /**
