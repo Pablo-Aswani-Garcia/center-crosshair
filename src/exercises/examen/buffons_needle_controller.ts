@@ -20,11 +20,13 @@ export class BuffonNeedleController {
   private readonly model: BuffonNeedleModel;
   private readonly view: BuffonNeedleView;
   private drop1: HTMLButtonElement;
+  private drop10: HTMLButtonElement;
   private drop100: HTMLButtonElement;
   private drop1000: HTMLButtonElement;
   private dropCustom: HTMLButtonElement;
   private customDrop: HTMLInputElement;
   private textOutput: HTMLElement;
+  private startButton: HTMLButtonElement;
 
   /**
    * Initializes the controller with the given model and view, and sets up event listeners for user interactions.
@@ -35,11 +37,13 @@ export class BuffonNeedleController {
     this.model = model;
     this.view = view;
     this.drop1 = document.getElementById('drop-1') as HTMLButtonElement;
+    this.drop10 = document.getElementById('drop-10') as HTMLButtonElement;
     this.drop100 = document.getElementById('drop-100') as HTMLButtonElement;
     this.drop1000 = document.getElementById('drop-1000') as HTMLButtonElement;
     this.dropCustom = document.getElementById('drop-custom') as HTMLButtonElement;
-    this.customDrop = document.getElementById('drop-custom-text') as HTMLInputElement
+    this.customDrop = document.getElementById('custom-drop') as HTMLInputElement;
     this.textOutput = document.getElementById('textOutput') as HTMLElement;
+    this.startButton = document.getElementById('start-over') as HTMLButtonElement;
     this.addEvents();
 
   }
@@ -56,6 +60,20 @@ export class BuffonNeedleController {
     this.textOutput.textContent += `\n Distancia:(${this.model.minimalDistanceToLines(middlePoint).toFixed(2)})`;
     this.textOutput.textContent += `, angulo: ${angle.toFixed(2)}`;
   }
+
+  /**
+   * drop a custom ammount of needles
+   * @param {number} customAmmount - the number of needles to drop
+   * @returns {void}
+   */
+  dropCustomNeedles(customAmmount: number) { 
+    for (let i = 0; i < customAmmount; i++) {
+      let output = this.model.dropOneNeedle();
+      this.view.renderNeedle(output);
+    }
+  }
+
+
   /**
    * Add the listeners to the corresponding events
    */
@@ -67,8 +85,22 @@ export class BuffonNeedleController {
       let angle = this.model.angle(output);
       this.updateOutput(output, middle, angle);
     });
-
+    this.drop10.addEventListener('click', () => {
+      this.dropCustomNeedles(10);
+    });
+    this.drop100.addEventListener('click', () => {
+      this.dropCustomNeedles(100);
+    });
+    this.drop1000.addEventListener('click', () => {
+      this.dropCustomNeedles(1000);
+    });
+    this.dropCustom.addEventListener('click', () => {
+      let customValue = parseInt(this.customDrop.value);
+      this.dropCustomNeedles(customValue);
+    });
+    this.startButton.addEventListener('click', () => {
+      this.view.clearCanvas();
+      this.view.drawAxis();
+    });
   }
-
-
 }

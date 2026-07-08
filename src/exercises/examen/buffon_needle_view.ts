@@ -42,6 +42,13 @@ export class BuffonNeedleView {
   }
 
   /**
+   * Clears the canvas by filling it with a white rectangle, effectively removing any previous drawings.
+   */
+  clearCanvas() {
+    this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
+  }
+  
+  /**
    * Renders a needle in the viewport
    * @param {FunctionPoint} needle - the needle to show on screen
    */
